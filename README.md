@@ -2,7 +2,7 @@
   <img src="assets/h-icon.png" alt="Hutch" width="96" height="96" />
 </p>
 
-<h1 align="center">hutchclaw</h1>
+<h1 align="center">HutchClaw</h1>
 
 <p align="center">
   <em>Hutch tools for OpenClaw — store, query, and publish structured data from agents.</em>
