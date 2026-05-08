@@ -1,7 +1,31 @@
-# hutchclaw
+<p align="center">
+  <img src="assets/h-icon.png" alt="Hutch" width="96" height="96" />
+</p>
 
-OpenClaw plugin for [Hutch](https://hutchdb.com) — store, query, and publish
-structured data from agents via the Hutch REST API.
+<h1 align="center">hutchclaw</h1>
+
+<p align="center">
+  <em>Hutch tools for OpenClaw — store, query, and publish structured data from agents.</em>
+</p>
+
+<p align="center">
+  <a href="https://hutchdb.com">hutchdb.com</a> ·
+  <a href="https://docs.openclaw.ai">OpenClaw docs</a> ·
+  <a href="https://github.com/ExpeditedProjects/hutchclaw/issues">Issues</a>
+</p>
+
+---
+
+## What it does
+
+Gives an OpenClaw agent a structured-data backend. Your agent can:
+
+- Save anything as a record — bookmarks, notes, leads, research — with no schema setup.
+- Query later by exact filter, full-text search, sort, group, or aggregate.
+- Inspect, evolve, and publish what's stored, all from inside a conversation.
+
+Collections auto-create on first write. Records are arbitrary JSON, queryable
+via Postgres JSONB containment + full-text search. Hutch handles the rest.
 
 ## Install
 
@@ -30,12 +54,12 @@ npm install hutchclaw
 }
 ```
 
-`apiKey` is a Hutch API key (`hutch_*` prefix). `baseUrl` defaults to
-`https://hutchdb.com`; set it to your own URL for self-hosted deployments.
+Get an API key at [hutchdb.com](https://hutchdb.com). For self-hosted
+deployments, set `baseUrl` to your own URL.
 
 ## Tools
 
-Always available:
+### Always available
 
 | Tool                  | Purpose                                                |
 | --------------------- | ------------------------------------------------------ |
@@ -52,17 +76,23 @@ Always available:
 | `update_schema`       | Set field type, options, position, visibility.         |
 | `create_view`         | Create a named view (table / kanban / calendar / etc). |
 
-Destructive (require allowlisting via `tools.allow`):
+### Destructive (opt-in)
 
-| Tool                 | Purpose                                              |
-| -------------------- | ---------------------------------------------------- |
-| `delete_collection`  | Permanently delete a collection and all records.     |
-| `delete_record`      | Soft-delete a single record.                         |
-| `transform_records`  | Bulk rename / remove / set fields across records.    |
+These require allowlisting via `tools.allow` — they bypass undo:
 
-## Publishing
+| Tool                | Purpose                                             |
+| ------------------- | --------------------------------------------------- |
+| `delete_collection` | Permanently delete a collection and all records.    |
+| `delete_record`     | Soft-delete a single record.                        |
+| `transform_records` | Bulk rename / remove / set fields across records.   |
+
+## Publishing to ClawHub
 
 ```bash
 clawhub package publish . --family code-plugin --dry-run
 clawhub package publish . --family code-plugin
 ```
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
