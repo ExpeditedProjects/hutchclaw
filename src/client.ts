@@ -3,12 +3,39 @@ export interface HutchConfig {
   baseUrl: string;
 }
 
-export class HutchClient {
-  constructor(private readonly config: HutchConfig) {}
+export class HutchApiError extends Error {
+  constructor(message: string, public readonly status: number) {
+    super(message);
+    this.name = "HutchApiError";
+  }
+}
 
-  private url(path: string): string {
-    const base = this.config.baseUrl.replace(/\/$/, "");
-    return `${base}${path}`;
+const PRIVATE_HOST_RE =
+  /^(?:127\.|10\.|192\.168\.|169\.254\.|0\.|::1$|fe80:|fc00:|fd[0-9a-f]{2}:)/i;
+
+function assertSafeBaseUrl(raw: string): URL {
+  const url = new URL(raw);
+  const isLoopback = url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "::1";
+  if (url.protocol === "http:" && !isLoopback) {
+    throw new Error(`HutchClient: baseUrl must be https (got ${url.protocol}//${url.hostname})`);
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error(`HutchClient: baseUrl protocol must be http(s) (got ${url.protocol})`);
+  }
+  if (!isLoopback && PRIVATE_HOST_RE.test(url.hostname)) {
+    throw new Error(`HutchClient: baseUrl points at a private/link-local host (${url.hostname})`);
+  }
+  return url;
+}
+
+export class HutchClient {
+  private readonly baseUrl: string;
+  private readonly apiKey: string;
+
+  constructor(config: HutchConfig) {
+    const url = assertSafeBaseUrl(config.baseUrl);
+    this.baseUrl = url.toString().replace(/\/$/, "");
+    this.apiKey = config.apiKey;
   }
 
   private async request<T = unknown>(
@@ -16,10 +43,10 @@ export class HutchClient {
     path: string,
     body?: unknown,
   ): Promise<T> {
-    const res = await fetch(this.url(path), {
+    const res = await fetch(`${this.baseUrl}${path}`, {
       method,
       headers: {
-        Authorization: `Bearer ${this.config.apiKey}`,
+        Authorization: `Bearer ${this.apiKey}`,
         ...(body !== undefined ? { "Content-Type": "application/json" } : {}),
       },
       body: body !== undefined ? JSON.stringify(body) : undefined,
@@ -131,13 +158,6 @@ export class HutchClient {
       `/api/v1/collections/${encodeURIComponent(slug)}/views`,
       body,
     );
-  }
-}
-
-export class HutchApiError extends Error {
-  constructor(message: string, public readonly status: number) {
-    super(message);
-    this.name = "HutchApiError";
   }
 }
 

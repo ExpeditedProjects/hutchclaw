@@ -27,9 +27,7 @@ export default definePluginEntry({
     };
     const client = new HutchClient(config);
 
-    const tool = makeToolFactory(api, client);
-
-    // ---- Read ----
+    const tool = makeToolFactory(api);
 
     tool({
       name: "list_collections",
@@ -92,8 +90,6 @@ export default definePluginEntry({
       }),
       handler: ({ slug, ...body }) => client.queryRecords(slug, body),
     });
-
-    // ---- Write ----
 
     tool({
       name: "store_records",
@@ -217,8 +213,6 @@ export default definePluginEntry({
       handler: ({ slug, ...body }) => client.createView(slug, body),
     });
 
-    // ---- Destructive (optional, opt-in) ----
-
     tool(
       {
         name: "delete_collection",
@@ -276,7 +270,6 @@ interface ToolDef<P> {
 
 function makeToolFactory(
   api: { registerTool: (def: unknown, opts?: unknown) => void },
-  _client: HutchClient,
 ) {
   return function tool<P>(def: ToolDef<P>, opts?: { optional?: boolean }) {
     api.registerTool(
@@ -288,19 +281,11 @@ function makeToolFactory(
           try {
             const result = await def.handler(params);
             return {
-              content: [
-                { type: "text", text: JSON.stringify(result, null, 2) },
-              ],
+              content: [{ type: "text", text: JSON.stringify(result) }],
             };
           } catch (err) {
-            const message =
-              err instanceof HutchApiError
-                ? `${err.status}: ${err.message}`
-                : err instanceof Error
-                  ? err.message
-                  : String(err);
             return {
-              content: [{ type: "text", text: message }],
+              content: [{ type: "text", text: formatError(err) }],
               isError: true,
             };
           }
@@ -309,4 +294,13 @@ function makeToolFactory(
       opts,
     );
   };
+}
+
+function formatError(err: unknown): string {
+  if (err instanceof HutchApiError) {
+    if (err.status >= 400 && err.status < 500) return `${err.status}: ${err.message}`;
+    return `Hutch server error (status ${err.status})`;
+  }
+  if (err instanceof Error) return err.message;
+  return String(err);
 }
