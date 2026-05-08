@@ -1,0 +1,43 @@
+{
+  "name": "hutchclaw",
+  "version": "0.1.0",
+  "description": "Hutch tools for OpenClaw — store and query structured data from agents.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "files": [
+    "src",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExpeditedProjects/hutchclaw.git"
+  },
+  "homepage": "https://github.com/ExpeditedProjects/hutchclaw#readme",
+  "bugs": {
+    "url": "https://github.com/ExpeditedProjects/hutchclaw/issues"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "hutch",
+    "tools",
+    "structured-data"
+  ],
+  "license": "MIT",
+  "openclaw": {
+    "extensions": ["./src/index.ts"],
+    "compat": {
+      "pluginApi": ">=2026.3.24-beta.2",
+      "minGatewayVersion": "2026.3.24-beta.2"
+    },
+    "build": {
+      "openclawVersion": "2026.3.24-beta.2",
+      "pluginSdkVersion": "2026.3.24-beta.2"
+    }
+  },
+  "peerDependencies": {
+    "@sinclair/typebox": "^0.34.0",
+    "openclaw": ">=2026.3.24-beta.2"
+  }
+}

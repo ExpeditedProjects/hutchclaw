@@ -1,0 +1,48 @@
+{
+  "id": "hutch",
+  "name": "Hutch",
+  "description": "Store, query, and publish structured data via the Hutch API.",
+  "contracts": {
+    "tools": [
+      "list_collections",
+      "get_collection",
+      "describe_collection",
+      "store_records",
+      "query_records",
+      "search",
+      "update_collection",
+      "update_record",
+      "infer_schema",
+      "update_schema",
+      "set_record_status",
+      "create_view",
+      "delete_collection",
+      "delete_record",
+      "transform_records"
+    ]
+  },
+  "toolMetadata": {
+    "delete_collection": { "optional": true },
+    "delete_record": { "optional": true },
+    "transform_records": { "optional": true }
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["apiKey"],
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "description": "Hutch API key (format: hutch_*)."
+      },
+      "baseUrl": {
+        "type": "string",
+        "description": "Hutch API base URL. Defaults to the hosted Hutch service.",
+        "default": "https://hutchdb.com"
+      }
+    }
+  }
+}
