@@ -2,7 +2,7 @@ import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 import { Type } from "@sinclair/typebox";
 import { HutchClient, HutchApiError, type HutchConfig } from "./client.js";
 
-const DEFAULT_BASE_URL = "https://hutchdb.com";
+const DEFAULT_BASE_URL = "https://app.hutchdb.com";
 
 const configSchema = Type.Object({
   apiKey: Type.String({ description: "Hutch API key (hutch_*)." }),

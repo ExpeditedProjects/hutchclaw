@@ -41,7 +41,7 @@
       "baseUrl": {
         "type": "string",
         "description": "Hutch API base URL. Defaults to the hosted Hutch service.",
-        "default": "https://hutchdb.com"
+        "default": "https://app.hutchdb.com"
       }
     }
   }

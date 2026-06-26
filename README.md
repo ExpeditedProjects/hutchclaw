@@ -43,7 +43,7 @@ npm install hutchclaw
     "entries": {
       "hutch": {
         "apiKey": "hutch_..."
-        // baseUrl defaults to https://hutchdb.com — override for self-hosted.
+        // baseUrl defaults to https://app.hutchdb.com — override for self-hosted.
       }
     },
     "tools": {
