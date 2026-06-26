@@ -30,7 +30,7 @@ export default definePluginEntry({
     const tool = makeToolFactory(api);
 
     tool({
-      name: "list_collections",
+      name: "hutch_list_collections",
       description:
         "List all stored collections. Use when the user asks what data they have saved or wants to see their stored information.",
       parameters: Type.Object({}),
@@ -38,7 +38,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "get_collection",
+      name: "hutch_get_collection",
       description:
         "Get details about a specific collection including record count and schema.",
       parameters: Type.Object({
@@ -48,7 +48,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "describe_collection",
+      name: "hutch_describe_collection",
       description:
         "Describe a collection's field names, types, and sample values. Use to understand the shape of stored data before querying.",
       parameters: Type.Object({
@@ -58,7 +58,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "search",
+      name: "hutch_search",
       description:
         "Search across everything stored in Hutch. Use when the user wants to find something but doesn't know which collection it's in.",
       parameters: Type.Object({
@@ -71,7 +71,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "query_records",
+      name: "hutch_query_records",
       description:
         "Retrieve stored records from a collection with filters, search, sort, and aggregation.",
       parameters: Type.Object({
@@ -92,7 +92,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "store_records",
+      name: "hutch_store_records",
       description:
         "Save data to Hutch. The collection auto-creates if it doesn't exist. Pass `data` for one record or `records` for many.",
       parameters: Type.Object({
@@ -112,7 +112,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "update_collection",
+      name: "hutch_update_collection",
       description:
         "Update collection metadata (name, description, unique key, published, submissions).",
       parameters: Type.Object({
@@ -129,7 +129,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "update_record",
+      name: "hutch_update_record",
       description: "Replace a single record's data by ID.",
       parameters: Type.Object({
         slug: Type.String(),
@@ -140,7 +140,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "set_record_status",
+      name: "hutch_set_record_status",
       description: "Set the status on a record (active, pending, flagged, archived).",
       parameters: Type.Object({
         slug: Type.String(),
@@ -157,7 +157,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "infer_schema",
+      name: "hutch_infer_schema",
       description:
         "Trigger schema inference on a collection. Analyzes existing records to determine field types.",
       parameters: Type.Object({ slug: Type.String() }),
@@ -165,7 +165,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "update_schema",
+      name: "hutch_update_schema",
       description: "Set or modify a single field's type, options, position, or visibility.",
       parameters: Type.Object({
         slug: Type.String(),
@@ -192,7 +192,7 @@ export default definePluginEntry({
     });
 
     tool({
-      name: "create_view",
+      name: "hutch_create_view",
       description: "Create a named view on a collection (table, kanban, calendar, gallery).",
       parameters: Type.Object({
         slug: Type.String(),
@@ -215,7 +215,7 @@ export default definePluginEntry({
 
     tool(
       {
-        name: "delete_collection",
+        name: "hutch_delete_collection",
         description:
           "Permanently delete a collection and all its records. Destructive.",
         parameters: Type.Object({ slug: Type.String() }),
@@ -226,7 +226,7 @@ export default definePluginEntry({
 
     tool(
       {
-        name: "delete_record",
+        name: "hutch_delete_record",
         description: "Soft-delete a single record by ID.",
         parameters: Type.Object({
           slug: Type.String(),
@@ -239,7 +239,7 @@ export default definePluginEntry({
 
     tool(
       {
-        name: "transform_records",
+        name: "hutch_transform_records",
         description:
           "Bulk update records: rename fields, remove fields, or set a field value (optionally filtered).",
         parameters: Type.Object({

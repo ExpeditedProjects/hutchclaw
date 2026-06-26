@@ -63,18 +63,18 @@ deployments, set `baseUrl` to your own URL.
 
 | Tool                  | Purpose                                                |
 | --------------------- | ------------------------------------------------------ |
-| `list_collections`    | List all collections.                                  |
-| `get_collection`      | Get collection details and record count.               |
-| `describe_collection` | Field types, sample values, schema.                    |
-| `store_records`       | Save one or many records (auto-creates collection).    |
-| `query_records`       | Filter, search, sort, aggregate, time-bucket.          |
-| `search`              | Full-text search across all collections.               |
-| `update_collection`   | Edit name, description, unique key, published flag.    |
-| `update_record`       | Replace a record's data.                               |
-| `set_record_status`   | Mark active / pending / flagged / archived.            |
-| `infer_schema`        | Auto-detect field types from existing records.         |
-| `update_schema`       | Set field type, options, position, visibility.         |
-| `create_view`         | Create a named view (table / kanban / calendar / etc). |
+| `hutch_list_collections`    | List all collections.                                  |
+| `hutch_get_collection`      | Get collection details and record count.               |
+| `hutch_describe_collection` | Field types, sample values, schema.                    |
+| `hutch_store_records`       | Save one or many records (auto-creates collection).    |
+| `hutch_query_records`       | Filter, search, sort, aggregate, time-bucket.          |
+| `hutch_search`              | Full-text search across all collections.               |
+| `hutch_update_collection`   | Edit name, description, unique key, published flag.    |
+| `hutch_update_record`       | Replace a record's data.                               |
+| `hutch_set_record_status`   | Mark active / pending / flagged / archived.            |
+| `hutch_infer_schema`        | Auto-detect field types from existing records.         |
+| `hutch_update_schema`       | Set field type, options, position, visibility.         |
+| `hutch_create_view`         | Create a named view (table / kanban / calendar / etc). |
 
 ### Destructive (opt-in)
 
@@ -82,9 +82,9 @@ These require allowlisting via `tools.allow` — they bypass undo:
 
 | Tool                | Purpose                                             |
 | ------------------- | --------------------------------------------------- |
-| `delete_collection` | Permanently delete a collection and all records.    |
-| `delete_record`     | Soft-delete a single record.                        |
-| `transform_records` | Bulk rename / remove / set fields across records.   |
+| `hutch_delete_collection` | Permanently delete a collection and all records.    |
+| `hutch_delete_record`     | Soft-delete a single record.                        |
+| `hutch_transform_records` | Bulk rename / remove / set fields across records.   |
 
 ## Publishing to ClawHub
 
