@@ -1,6 +1,6 @@
 {
   "name": "hutchclaw",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hutch tools for OpenClaw — store and query structured data from agents.",
   "type": "module",
   "main": "./src/index.ts",
